@@ -99,7 +99,7 @@ if prompt := st.chat_input("Say something..."):
                         "when considering the particular context. In other words, you do not need to limit " \
                         "your response to the student's text while maintaining a strong connection with the " \
                         "student's idea. \n" + \
-                        f"your character and context: you are a " + st.session_state[f"id{j}"] \
+                        f"your current character and context: you are a " + st.session_state[f"id{j}"] \
                         + " who is " + st.session_state[f"sub{j}"] + " in the time period " \
                         + st.session_state[f"time{j}"] + "\n" + "Again, please keep your response brief," \
                                                                 " equivalent in length with the student text," \
