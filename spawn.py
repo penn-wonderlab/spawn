@@ -14,7 +14,7 @@ from langchain_groq import ChatGroq
 st.set_page_config(layout="wide")
 
 st.header('Spawn', divider='rainbow')
-with st.expander("What is Spawn?"):
+with st.expander("Read more about the idea behind Spawn."):
     st.markdown("*What if multiple AI agents can be configured to guide the student to consider an idea in different "
                 "ways?* Each agent has different specialties and can access different tools. They work collaboratively "
                 "to advise the student to improve their ideas.")
