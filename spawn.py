@@ -82,8 +82,8 @@ if 'transfer_clicked' not in st.session_state:
     st.session_state.transfer_clicked = False
 
 
-def transfer_clicked():
-    st.session_state.transfer_clicked = True
+def transfer_clicked(reply):
+    st.session_state.transfer_clicked = reply
 
 
 with chat:
@@ -98,9 +98,16 @@ with chat:
     if "messages" not in st.session_state:
         st.session_state.messages = []
 
+    button_count = 0
     for message in st.session_state.messages:
         with chatbox.chat_message(message["role"]):
             st.markdown(message["content"])
+            if message["role"] is not "user":
+                st.button(":arrow_right:", help="Transfer bot response over to Essay.",
+                          on_click=transfer_clicked, args=["\n"+message['content'].split(": ", 1)[1]],
+                          key=f"old_t_button_{button_count}")
+            button_count += 1
+            print(message['content'].split(": ", 1))
 
     # this is for langchain
     if 'chat_history' not in st.session_state:
@@ -162,12 +169,13 @@ with chat:
                 st.markdown(chat_response)
 
                 st.button(":arrow_right:", help="Transfer bot response over to Essay.",
-                          on_click=transfer_clicked)
+                          on_click=transfer_clicked, args=["\n"+response], key=f"t_button_{j}")
             # Add assistant response to chat history
             st.session_state.messages.append({"role": "assistant", "content": chat_response})
 
 with essay:
     st.subheader("Essay")
     if st.session_state.transfer_clicked:
-        st.session_state.student_text += st.session_state.messages[-1]['content'].split(": ", 1)[1]
+        st.session_state.student_text += st.session_state.transfer_clicked
+        st.session_state.transfer_clicked = False
     st.text_area("essay", label_visibility="collapsed", height=355, key="student_text")
