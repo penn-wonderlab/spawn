@@ -11,7 +11,7 @@ from langchain_core.messages import SystemMessage
 from langchain.chains.conversation.memory import ConversationBufferWindowMemory
 from langchain_groq import ChatGroq
 
-st.set_page_config(layout="wide")
+st.set_page_config(page_title="Spawn", layout="wide")
 
 st.markdown("""
         <style>
