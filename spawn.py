@@ -124,21 +124,18 @@ with chat:
         st.session_state.messages.append({"role": "user", "content": prompt})
         for j in range(0, st.session_state.selectbox_count + 1):
             system_prompt = "You are a creative assistant who is an expert in helping someone think about ideas " \
-                            "from different, fresh angles. Below is one piece of text from a grade 9 student who " \
-                            "is studying science. It might be a question, an opinion, or an explanatory theory. " \
-                            "You will take a look at the text and say something equivalent back to the student. " \
-                            "Your output should have equivalent length; do not make it a long speech. Don't make " \
-                            "your output a response to the student, simply output a statement. Use a similar " \
-                            "tone as the student. I will ask you to speak as a particular character from a " \
-                            "particular context. Please draw on knowledge this particular character would have " \
-                            "when considering the particular context. In other words, you do not need to limit " \
-                            "your response to the student's text while maintaining a strong connection with the " \
-                            "student's idea. \n" + \
-                            f"your current character and context: you are a " + st.session_state[f"id{j}"] \
+                            "from different, fresh angles. Below is one piece of text from a student. It might be " \
+                            "a question, an opinion, or an explanatory theory. I will ask you to embody a " \
+                            "character. Use the knowledge this character would have when considering the student's " \
+                            "message. You will then provide ways in which the student's idea can be improved in the " \
+                            "form of a list of statements or questions. Remember to match the tone of the student " \
+                            "and keep your response brief. \n" + \
+                            f"The current character and context: a " + st.session_state[f"id{j}"] \
                             + " who is " + st.session_state[f"sub{j}"] + " in the time period " \
                             + st.session_state[f"time{j}"] + "\n" + "Again, please keep your response brief," \
-                                                                    " equivalent in length with the student text," \
-                                                                    " and remember to stay in character."
+                                                                    " equivalent in length and tone with the student " \
+                                                                    "text. Your response should be a list of " \
+                                                                    "statements or questions, under 100 words."
             prompt_template = ChatPromptTemplate.from_messages(
                 [
                     # This is the persistent system prompt that is always included at the start of the chat.
